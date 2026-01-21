@@ -42,7 +42,10 @@ public:
         }
 
         int matches = 0;
-
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] == 0) matches++;
+        }
+        
         for (int i = 0; i < k; i++) {
             int idx = s2[i] - 'a';
             freq[idx]--;
