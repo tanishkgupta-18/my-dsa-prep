@@ -4,6 +4,7 @@
     subarrays with sum == goal = subarrays with sum ≤ goal − subarrays with sum ≤ goal − 1
 */
 
+/*NOTE: Works only for non-negative integers if negatives are allowed then we go for universal solution*/
 class Solution {
 public:
     int atMost(vector<int>& nums, int goal) {
