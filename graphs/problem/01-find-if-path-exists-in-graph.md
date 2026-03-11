@@ -71,3 +71,37 @@ public:
     }
 };
 ```
+
+## DFS Based
+```cpp
+class Solution {
+public:
+    bool dfs(vector<vector<int>>& adj, vector<bool>& vis, int src, int dest){
+
+        if(src == dest) return true;
+
+        vis[src] = true;
+
+        for(int v : adj[src]){
+            if(!vis[v] && dfs(adj, vis, v, dest))
+                return true;
+        }
+
+        return false;
+    }
+
+    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+
+        vector<vector<int>> adj(n);
+
+        for(auto &e : edges){
+            adj[e[0]].push_back(e[1]);
+            adj[e[1]].push_back(e[0]);
+        }
+
+        vector<bool> vis(n,false);
+
+        return dfs(adj,vis,source,destination);
+    }
+};
+```
