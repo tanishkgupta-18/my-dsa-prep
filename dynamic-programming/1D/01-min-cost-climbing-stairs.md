@@ -2,24 +2,18 @@
 ```cpp
 class Solution {
 public:
-
     int f(int i, vector<int>& cost, vector<int>& dp){
-
         if(i >= cost.size()) return 0;
-
         if(dp[i] != -1) return dp[i];
 
-        int one = cost[i] + f(i+1, cost, dp);
-        int two = cost[i] + f(i+2, cost, dp);
+        int oneStep = f(i+1, cost, dp);
+        int twoStep = f(i+2, cost, dp);
 
-        return dp[i] = min(one, two);
+        return dp[i] = cost[i] + min(oneStep, twoStep); 
     }
-
     int minCostClimbingStairs(vector<int>& cost) {
-
         int n = cost.size();
         vector<int> dp(n, -1);
-
         return min(f(0, cost, dp), f(1, cost, dp));
     }
 };
@@ -30,19 +24,14 @@ public:
 class Solution {
 public:
     int minCostClimbingStairs(vector<int>& cost) {
-
         int n = cost.size();
+        vector<int> dp(n+2, 0);
 
-        vector<int> dp(n);
-
-        dp[0] = cost[0];
-        dp[1] = cost[1];
-
-        for(int i = 2; i < n; i++) {
-            dp[i] = cost[i] + min(dp[i-1], dp[i-2]);
+        for(int i = n-1 ; i >= 0 ; --i){
+            dp[i] = cost[i] + min(dp[i+1], dp[i+2]);
         }
 
-        return min(dp[n-1], dp[n-2]);
+        return min(dp[0], dp[1]);
     }
 };
 ```
