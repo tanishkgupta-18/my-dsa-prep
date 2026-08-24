@@ -10,7 +10,7 @@ public:
             long long total = mid*(mid+1)/2;
             
             //[T, T, T, F, F] take the last true
-            if(total <= (long long)n) l = mid; ue
+            if(total <= (long long)n) l = mid;
             else r = mid-1;
         }
 

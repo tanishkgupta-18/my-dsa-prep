@@ -62,9 +62,9 @@ public:
                 node->put(ch, new Node());
             }
             node = node->get(ch);
-            node->increasePrefix();  // 🔥 prefix count
+            node->increasePrefix();  // prefix count
         }
-        node->increaseEnd();  // 🔥 end count
+        node->increaseEnd();  // end count
     }
 
     int countWordsEqualTo(string &word) {
