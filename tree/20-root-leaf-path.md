@@ -1,27 +1,32 @@
 ```cpp
 class Solution {
 public:
-    void solve(Node* root, vector<int>& arr, vector<vector<int>>& res) {
-        if (!root) return;
+    void dfs(Node* root, vector<int>& path, vector<vector<int>>& ans) {
+        if (root == nullptr)
+            return;
 
-        arr.push_back(root->data);
+        // include current node in the path
+        path.push_back(root->data);
 
-        if (!root->left && !root->right) {
-            res.push_back(arr);
+        // if leaf node, store the complete root-to-leaf path
+        if (root->left == nullptr && root->right == nullptr) {
+            ans.push_back(path);
         } else {
-            solve(root->left, arr, res);
-            solve(root->right, arr, res);
+            dfs(root->left, path, ans);
+            dfs(root->right, path, ans);
         }
 
-        // backtrack
-        arr.pop_back();
+        // backtrack: remove current node before returning
+        path.pop_back();
     }
 
     vector<vector<int>> Paths(Node* root) {
-        vector<vector<int>> res;
-        vector<int> arr;
-        solve(root, arr, res);
-        return res;
+        vector<vector<int>> ans;
+        vector<int> path;
+
+        dfs(root, path, ans);
+
+        return ans;
     }
 };
 ```
