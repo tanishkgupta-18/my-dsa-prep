@@ -51,32 +51,30 @@ Approach:
 
 
 class Solution {
-  public:
+public:
     int minSteps(vector<int>& arr, int start, int end) {
-        int n = arr.size();
-        
-        vector<int> dist(1000, INT_MAX);
-        
+        vector<bool> visited(1000, false);
+
         queue<pair<int, int>> q;
         q.push({start, 0});
-        
-        dist[start] = 0;
-        while(!q.empty()){
-            auto &[node, steps] = q.front();
+        visited[start] = true;
+
+        while (!q.empty()) {
+            auto [node, steps] = q.front();
             q.pop();
-            
-            if(node == end) return steps;
-            
-            for(auto& x : arr){
-                int res = (x*node)%1000;
-                
-                if(dist[res] > steps + 1){
-                    dist[res] = steps + 1;
-                    q.push({res, dist[res]});
+
+            if (node == end) return steps;
+
+            for (auto& x : arr) {
+                int next = (node * x) % 1000;
+
+                if (!visited[next]) {
+                    visited[next] = true;
+                    q.push({next, steps + 1});
                 }
             }
         }
-        
+
         return -1;
     }
 };
